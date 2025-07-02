@@ -7,7 +7,7 @@ include 'db.php';
 
 try {
     // Exécution de la requête pour récupérer les 3 dernières actualités
-    $stmt = $pdo->query("SELECT * FROM actualites ORDER BY date DESC LIMIT 3");
+    $stmt = $pdo->query("SELECT * FROM actualites ORDER BY published_at DESC LIMIT 3");
     $actus = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
 } catch (PDOException $e) {
     // En cas d'erreur SQL, affichage du message et initialisation à tableau vide
