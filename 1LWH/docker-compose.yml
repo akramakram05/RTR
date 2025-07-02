@@ -1,0 +1,29 @@
+networks:
+  backend:
+
+volumes:
+  web_backups:
+
+
+services:
+  web:
+    build: ./mywebapp
+    container_name: MyWebApp
+    hostname: MyWebApp
+    ports:
+      - "2222:22"
+    volumes:
+      - web_backups:/var/backup
+    networks: [backend]
+
+  db:
+    image: debian:12
+    container_name: MyDatabase
+    hostname: MyDatabase
+    command: tail -f /dev/null
+    user: root
+    environment:
+      - USER=dbadmin
+    networks: [backend]
+
+

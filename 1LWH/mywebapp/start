@@ -1,0 +1,48 @@
+#!/bin/bash
+set -e
+
+IMAGE_NAME="akram-rtr-lwh-lin-image"
+
+read -p "Enter your name and ID (e.g., name-1234): " CONTAINER_NAME
+
+CONTAINER_NAME_SANITIZED=$(echo "$CONTAINER_NAME" | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]-_')
+
+if [ -z "$CONTAINER_NAME_SANITIZED" ]; then
+  echo "Invalid input. Container name cannot be empty."
+  exit 1
+fi
+
+if docker ps -a --format '{{.Names}}' | grep -q "^${CONTAINER_NAME_SANITIZED}$"; then
+  echo "A container with the name '${CONTAINER_NAME_SANITIZED}' already exists. Stopping script."
+  exit 1
+fi
+
+if ! docker images --format '{{.Repository}}' | grep -q "^${IMAGE_NAME}$"; then
+  echo "Docker image '${IMAGE_NAME}' not found. Building image..."
+  docker build -t ${IMAGE_NAME} .
+else
+  echo "Docker image '${IMAGE_NAME}' already exists."
+fi
+
+echo "Creating and starting container '${CONTAINER_NAME_SANITIZED}'..."
+docker run --privileged -d --name ${CONTAINER_NAME_SANITIZED} \
+  --memory="2g" \
+  --cpus="1.5" \
+  -p 2222:22 \
+  -p 80:80 \
+  -p 443:443 \
+  -p 3306:3306 \
+  -p 2121:21 \
+  -p 2020:20 \
+  ${IMAGE_NAME}
+
+KNOWN_HOSTS_FILE="$HOME/.ssh/known_hosts"
+SSH_HOST="[localhost]:2222"
+
+if ssh-keygen -F "$SSH_HOST" > /dev/null; then
+  echo "Cleaning up old SSH host key for $SSH_HOST..."
+  ssh-keygen -R "$SSH_HOST"
+fi
+
+echo "Container '${CONTAINER_NAME_SANITIZED}' started."
+echo "SSH access: ssh devops@localhost -p 2222 (password: devops)"
