@@ -1,0 +1,25 @@
+race,enfants,sportif,appartement,taille
+Papillon,True,True,True,petit
+Caniche,True,True,True,moyen
+Irish Setter,True,True,True,grand
+Beagle,True,True,False,petit
+Border Collie,True,True,False,moyen
+Golden Retriever,True,True,False,grand
+Carlin,True,False,True,petit
+Puli,True,False,True,moyen
+Leonberg,True,False,True,grand
+Tibetan Spaniel,True,False,False,petit
+Clumber Spaniel,True,False,False,moyen
+Newfoundland,True,False,False,grand
+Jack Russell Terrier,False,True,True,petit
+Norwegian Elkhound,False,True,True,moyen
+Weimaraner,False,True,True,grand
+Manchester Terrier,False,True,False,petit
+Saluki,False,True,False,moyen
+Husky Sibérien,False,True,False,grand
+Chihuahua,False,False,True,petit
+Schipperke,False,False,True,moyen
+Afghan Hound,False,False,True,grand
+Japanese Chin,False,False,False,petit
+Finnish Spitz,False,False,False,moyen
+Irish Wolfhound,False,False,False,grand
