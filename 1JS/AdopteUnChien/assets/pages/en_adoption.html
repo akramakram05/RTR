@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chiens à l'adoption</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <h1>AdopteUnChien</h1>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Accueil</a></li>
+        <li><a href="en_adoption.html">En adoption</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <button id="toggle-dark-mode">🌙</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Nos chiens à l'adoption</h2>
+
+    <label for="race-filter">Filtrer par race :</label>
+    <select id="race-filter">
+      <option value="all">Toutes</option>
+      <option value="labrador">Labrador</option>
+      <option value="beagle">Beagle</option>
+      <option value="bulldog">Bulldog</option>
+    </select>
+
+    <section id="dog-list">
+      <div class="dog" data-race="labrador">
+        <img src="../images/labrador.jpg" alt="Labrador">
+        <p>Léo – Labrador</p>
+      </div>
+      <div class="dog" data-race="beagle">
+        <img src="../images/beagle.jpg" alt="Beagle">
+        <p>Max – Beagle</p>
+      </div>
+      <div class="dog" data-race="bulldog">
+        <img src="../images/bulldog.jpeg" alt="Bulldog">
+        <p>Rocky – Bulldog</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>
